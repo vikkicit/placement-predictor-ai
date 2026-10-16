@@ -1,314 +1,373 @@
-# Student Placement Prediction & Placement Readiness Platform
+# Student Placement Prediction & Readiness Platform
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg)](https://fastapi.tiangolo.com)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-An enterprise-grade MLOps platform for student campus placement prediction, multi-dimensional readiness indexing, explainable AI diagnostics, and personalized career roadmaps.
-
----
-
-> [!IMPORTANT]
-> **Current Project Status: Architectural Foundation**
->
-> **ML training has not yet been implemented.**
->
-> The repository has been initialized with a clean, production-oriented modular architecture, configuration system, logging infrastructure, API schemas, and validation suite. Machine learning training, model selection, explainability, and dataset ingestion will be developed in successive phases.
-
----
-
-## 🎯 Project Objective
-
-The objective of this platform is to provide higher education institutions, career counseling cells, and students with an end-to-end intelligent career readiness platform that:
-
-1. Ingests and validates student academic, technical, and experiential records.
-2. Trains, compares, and evaluates multiple candidate classification models.
-3. Produces calibrated placement likelihood predictions and confidence bounds.
-4. Calculates a weighted **Placement Readiness Score** across 5 core competencies.
-5. Generates **AI-driven career insights**, identifying skill gaps and actionable recommendations.
-6. Serves predictions via high-throughput **FastAPI** REST microservices and an interactive dashboard.
-
----
-
-## 🏛️ System Architecture Flow
-
+```{=html}
+<p align="center">
 ```
-Student Profile
-      │
-      ▼
-   Dataset
-      │
-      ▼
-Data Ingestion (src/data/ingestion.py)
-      │
-      ▼
-Validation (src/data/validation.py)
-      │
-      ▼
-Preprocessing (src/preprocessing/preprocessor.py)
-      │
-      ▼
-Feature Engineering (src/features/feature_engineering.py)
-      │
-      ▼
-Model Training (src/models/train.py) [Pending Phase 4]
-      │
-      ▼
-Evaluation & Metrics (src/models/evaluate.py) [Pending Phase 6]
-      │
-      ▼
-Model Registry (src/models/registry.py)
-      │
-      ▼
-Prediction API (src/api/)
-      │
-      ▼
-Readiness Engine (src/readiness/readiness_score.py)
-      │
-      ▼
-AI Insights (src/insights/career_insights.py)
-      │
-      ▼
-Frontend Dashboard
+`<strong>`{=html}An ML/MLOps project for student placement prediction,
+career-readiness assessment, and actionable skill-gap
+insights.`</strong>`{=html}
+```{=html}
+</p>
+```
+```{=html}
+<p align="center">
+```
+`<img alt="Python" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white">`{=html}
+`<img alt="FastAPI" src="https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi&logoColor=white">`{=html}
+`<img alt="scikit-learn" src="https://img.shields.io/badge/ML-scikit--learn-F7931E?logo=scikitlearn&logoColor=white">`{=html}
+`<img alt="Docker" src="https://img.shields.io/badge/Deployment-Docker-2496ED?logo=docker&logoColor=white">`{=html}
+```{=html}
+</p>
+```
+## Overview
+
+**Student Placement Prediction & Readiness Platform** is a modular
+project concept for using student academic, technical, and
+career-preparation data to support placement-readiness analysis.
+
+The planned workflow brings together data validation, preprocessing,
+feature engineering, model training and evaluation, prediction serving,
+explainability, and career guidance through a Python backend.
+
+> **Project status:** The supplied project documentation describes an
+> architectural foundation and lists additional ML, API, dashboard, and
+> deployment milestones. Verify which components are implemented and
+> tested in the current repository before presenting them as completed.
+> Model accuracy, deployment status, and CI results are intentionally
+> not claimed here.
+
+## Problem Statement
+
+Students often receive fragmented feedback about academics, technical
+skills, projects, communication, and interview preparation. This project
+aims to organize relevant inputs into a consistent assessment workflow
+and provide practical next steps.
+
+## Goals
+
+-   Validate and prepare structured student-profile data.
+-   Develop and compare classification models for placement-related
+    outcomes.
+-   Assess placement readiness across multiple skill dimensions.
+-   Explain model outputs using feature importance and, where
+    appropriate, SHAP.
+-   Identify potential skill gaps and suggest improvement actions.
+-   Expose backend functionality through a FastAPI REST API.
+-   Support experiment tracking and reproducible ML workflows.
+
+## Planned capabilities
+
+  -----------------------------------------------------------------------
+  Component                           Purpose
+  ----------------------------------- -----------------------------------
+  Data ingestion and validation       Load student data and check
+                                      schema/constraints
+
+  Preprocessing and feature           Prepare numeric/categorical inputs
+  engineering                         and derive useful features
+
+  Model training and evaluation       Compare candidate models using
+                                      held-out data and suitable metrics
+
+  Prediction service                  Return predictions from a validated
+                                      model pipeline
+
+  Readiness scoring                   Summarize readiness across defined
+                                      competencies
+
+  Explainability                      Help inspect which inputs influence
+                                      model outputs
+
+  Career insights                     Turn identified skill gaps into
+                                      actionable recommendations
+
+  REST API                            Make backend functionality
+                                      available to a client application
+
+  Experiment tracking                 Record model experiments and
+                                      evaluation results
+  -----------------------------------------------------------------------
+
+Feature availability depends on the implementation present in the
+repository. Do not treat this table as proof that every component is
+already production-ready.
+
+## Technology Stack
+
+-   **Language:** Python
+-   **Data processing:** NumPy, pandas
+-   **Machine learning:** scikit-learn, XGBoost, CatBoost
+-   **Model interpretation:** SHAP
+-   **API:** FastAPI, Uvicorn, Pydantic
+-   **Experiment tracking:** MLflow
+-   **Testing:** pytest, HTTPX
+-   **Configuration:** YAML, environment variables
+-   **Packaging and tooling:** `pyproject.toml`, Black, isort
+-   **Containerization:** Docker and Docker Compose
+
+The installed dependencies and actual usage should be checked against
+the code before describing any package as actively used.
+
+## Architecture
+
+``` text
+Student Profile / Dataset
+          |
+          v
+Data Ingestion and Validation
+          |
+          v
+Preprocessing and Feature Engineering
+          |
+          v
+Model Training and Evaluation
+          |
+          v
+Validated Model Artifact
+          |
+          v
+Prediction API  -------> Readiness Assessment
+          |                       |
+          v                       v
+API Client / Dashboard      Skill-Gap Insights
 ```
 
-Detailed architectural specifications are documented in [`docs/architecture.md`](docs/architecture.md).
+This is the intended logical flow. The exact runtime flow depends on
+which modules have been implemented.
 
----
+## Repository Layout
 
-## 📁 Directory Structure
+The project documentation describes the following modular layout. Some
+directories may be created as development progresses.
 
-```
+``` text
 student-placement-mlops/
-│
+├── configs/                 # Application and model configuration
 ├── data/
-│   ├── raw/                  # Staged raw student datasets
-│   ├── interim/              # Partially transformed intermediate data
-│   ├── processed/            # Cleaned, train/test/val splits (Parquet)
-│   └── external/             # Third-party benchmark datasets
-│
+│   ├── raw/                 # Original datasets (not committed)
+│   ├── interim/             # Intermediate data (not committed)
+│   ├── processed/           # Prepared datasets (not committed)
+│   └── external/            # External datasets (not committed)
 ├── artifacts/
-│   ├── models/               # Serialized model artifacts (.joblib)
-│   ├── preprocessors/        # Fitted ColumnTransformer pipelines
-│   ├── metrics/              # Model evaluation reports and confusion matrices
-│   └── explainability/       # Feature importance charts and SHAP outputs
-│
-├── configs/
-│   ├── config.yaml           # Global system, paths, and API settings
-│   └── model_config.yaml     # Feature schemas, target columns, and model params
-│
-├── notebooks/                # Exploratory Data Analysis & experimentation
-│
+│   ├── models/              # Trained model artifacts
+│   ├── preprocessors/       # Fitted preprocessing pipelines
+│   ├── metrics/             # Evaluation outputs
+│   └── explainability/      # Feature-importance outputs
+├── docs/                    # Architecture, dataset, and pipeline docs
+├── notebooks/               # EDA and experiments
+├── scripts/                 # Setup and utility scripts
 ├── src/
-│   ├── __init__.py
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── ingestion.py      # Raw data ingestion handlers
-│   │   ├── validation.py     # Schema and constraint validator
-│   │   └── dataset.py        # Dataset loader and train/val/test splitter
-│   ├── preprocessing/
-│   │   ├── __init__.py
-│   │   └── preprocessor.py   # Scikit-learn ColumnTransformer pipelines
-│   ├── features/
-│   │   ├── __init__.py
-│   │   └── feature_engineering.py # Academic & skill index derivation
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── train.py          # Candidate model training orchestrator
-│   │   ├── evaluate.py       # Classification metric computation
-│   │   ├── predict.py        # Inference engine
-│   │   └── registry.py       # Model artifact versioning
-│   ├── explainability/
-│   │   ├── __init__.py
-│   │   └── feature_importance.py # Global & local explainability
-│   ├── readiness/
-│   │   ├── __init__.py
-│   │   └── readiness_score.py # Multi-dimensional readiness scoring
-│   ├── insights/
-│   │   ├── __init__.py
-│   │   └── career_insights.py # Skill gap & career action plans
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── main.py           # FastAPI entrypoint
-│   │   ├── schemas.py        # Pydantic request & response models
-│   │   └── routes.py         # REST endpoint routes
-│   ├── pipeline/
-│   │   ├── __init__.py
-│   │   └── training_pipeline.py # End-to-end training orchestrator
-│   └── utils/
-│       ├── __init__.py
-│       ├── logger.py         # Centralized logging setup
-│       ├── config.py         # Config loader & PathConfig
-│       └── common.py         # I/O and helper functions
-│
-├── tests/
-│   ├── __init__.py
-│   ├── test_config.py
-│   ├── test_logger.py
-│   ├── test_data_validation.py
-│   ├── test_preprocessing.py
-│   ├── test_prediction.py
-│   └── test_api.py
-│
-├── mlruns/                   # MLflow experiment tracking logs
-│
-├── docs/
-│   ├── architecture.md       # Complete architectural breakdown
-│   ├── dataset_card.md       # Dataset schema and attribute descriptions
-│   └── ml_pipeline.md        # MLOps lifecycle details
-│
-├── scripts/
-│   └── setup_project.py      # Environment and directory verifier
-│
-├── .env.example              # Environment variables template
-├── .gitignore                # Git ignore rules for data, models, and cache
-├── requirements.txt          # Foundational dependencies
-├── pyproject.toml            # Python packaging and tool configuration
-├── Dockerfile                # Production container specification
-├── docker-compose.yml        # Multi-container orchestration
-├── Makefile                  # Developer workflow automation commands
+│   ├── api/                 # FastAPI application and schemas
+│   ├── data/                # Ingestion, validation, and dataset loading
+│   ├── features/             # Feature engineering
+│   ├── preprocessing/       # Preprocessing pipelines
+│   ├── models/              # Training, evaluation, prediction, registry
+│   ├── explainability/      # Model interpretation
+│   ├── readiness/           # Readiness scoring
+│   ├── insights/            # Career insights and skill-gap analysis
+│   ├── pipeline/            # Pipeline orchestration
+│   └── utils/               # Configuration, logging, helpers
+├── tests/                   # Automated tests
+├── .env.example             # Environment-variable template
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yml
+├── Makefile
+├── pyproject.toml
+├── requirements.txt
 └── README.md
 ```
 
----
+## Getting Started
 
-## ⚙️ Setup and Installation
+### Prerequisites
 
-### 1. Prerequisites
-- Python 3.9+ (Python 3.10 recommended)
-- Git
+-   Python 3.10 recommended
+-   Git
+-   Optional: Docker and Docker Compose for containerized execution
 
-### 2. Clone and Setup Environment
+### 1. Clone the repository
 
-```bash
-# Clone repository
-git clone <repo-url> student-placement-mlops
+Replace `<your-github-username>` with your GitHub username after
+creating the repository.
+
+``` bash
+git clone https://github.com/<your-github-username>/student-placement-mlops.git
 cd student-placement-mlops
+```
 
-# Create virtual environment
+### 2. Create and activate a virtual environment
+
+**Windows PowerShell**
+
+``` powershell
 python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
 
-# Activate virtual environment
-# Windows:
-.venv\Scripts\activate
-# Linux/macOS:
+**Windows Command Prompt**
+
+``` bat
+python -m venv .venv
+.venv\Scripts\activate.bat
+```
+
+**Linux / macOS**
+
+``` bash
+python3 -m venv .venv
 source .venv/bin/activate
+```
 
-# Install dependencies
+### 3. Install dependencies
+
+``` bash
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Initialize Configuration & Environment
+### 4. Configure environment variables
 
-```bash
-# Copy environment variables template
+Copy the example file and edit values if needed.
+
+**Windows PowerShell**
+
+``` powershell
+Copy-Item .env.example .env
+```
+
+**Linux / macOS**
+
+``` bash
 cp .env.example .env
+```
 
-# Verify project structure and configuration
+Never commit your real `.env` file, API keys, credentials, private
+student information, or confidential datasets.
+
+### 5. Initialize the project
+
+If the setup script is present in your checkout:
+
+``` bash
 python scripts/setup_project.py
 ```
 
-### 4. Run Test Suite
+### 6. Run tests
 
-```bash
+``` bash
 pytest tests/ -v
 ```
 
-### 5. Launch FastAPI Service (Development)
+Run tests after checking that the test files and required fixtures are
+present. Do not report a passing test suite until the command succeeds
+locally or in CI.
 
-```bash
-uvicorn src.api.main:app --reload --host 0.0.0.0 --port 8000
+### 7. Start the API
+
+If `src/api/main.py` is implemented:
+
+``` bash
+uvicorn src.api.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Interactive API documentation will be available at:
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+Then open:
 
-### 6. Docker Quick Start (Production Containerization)
+-   API documentation: http://127.0.0.1:8000/docs
+-   ReDoc: http://127.0.0.1:8000/redoc
+-   Health endpoint: http://127.0.0.1:8000/health
 
-The platform is fully containerized with multi-stage Docker builds and Docker Compose orchestration.
+These URLs require the API to start successfully and the corresponding
+routes to exist.
 
-```bash
-# Build both backend and frontend images
+## Docker
+
+The repository includes a backend `Dockerfile` and a Docker Compose
+configuration. The Compose file also refers to a `frontend/` directory,
+so ensure that directory and its Dockerfile are present before starting
+both services.
+
+``` bash
 docker compose build
-
-# Start services in the background
 docker compose up -d
-
-# Check running container status and health
 docker compose ps
-
-# View container logs
-docker compose logs backend
-docker compose logs frontend
-
-# Stop containers
+docker compose logs -f backend
 docker compose down
 ```
 
-### 7. Continuous Integration & Quality (CI/CD)
+The backend is configured for port `8000`; the optional frontend is
+configured for port `3000`.
 
-The repository uses GitHub Actions (`.github/workflows/ci.yml`) to enforce code quality, test coverage, static analysis, and container buildability on every `push` and `pull_request` to `main`, `master`, and `develop`.
+## Model Evaluation
 
-#### Pipeline Workflow:
-1. **Backend Tests & Quality:**
-   - Verifies runtime model artifacts exist and load without retraining (`scripts/verify_docker.py`).
-   - Runs static linting with `ruff`.
-   - Executes 96 backend unit and integration tests with `pytest -q`.
-2. **Frontend Tests & Build:**
-   - Executes Jest test suite (`npm test -- --runInBand`).
-   - Runs TypeScript strict validation (`npx tsc --noEmit`).
-   - Compiles production bundle (`npm run build`).
-3. **Docker Build Verification:**
-   - Multi-stage Docker build validation for both backend and frontend images.
-4. **Security & Dependency Audit:**
-   - Runs `pip-audit` and `npm audit` for non-blocking dependency vulnerability monitoring.
+For a placement classification task, evaluate the model using metrics
+that reflect the dataset and class balance:
 
-#### Local Reproduction:
-Developers can verify all CI checks locally prior to pushing:
+-   **Precision:** Of students predicted as placed, how many were
+    actually placed?
+-   **Recall:** Of students who were placed, how many did the model
+    identify?
+-   **F1-score:** Harmonic mean of precision and recall.
+-   **ROC-AUC:** Ranking quality across classification thresholds, when
+    appropriate.
+-   **Confusion matrix:** Breakdown of correct and incorrect
+    classifications.
 
-```bash
-# Backend verification
-pytest -q
-python scripts/verify_docker.py
+Do not rely on accuracy alone, particularly when placed and non-placed
+examples are imbalanced. Use a held-out test set and cross-validation
+where appropriate. Prevent data leakage by excluding information that
+would not have been available at prediction time.
 
-# Frontend verification
-cd frontend
-npm test -- --runInBand
-npx tsc --noEmit
-npm run build
-cd ..
+## Responsible Use and Limitations
 
-# Docker build verification
-docker compose build
-```
+-   A model estimates patterns from historical data; it cannot guarantee
+    an individual student's placement outcome or salary.
+-   Predictions can reflect historical bias in the dataset and should
+    not be used as the sole basis for recruitment or academic decisions.
+-   Use consented, relevant data and remove personally identifiable
+    information wherever possible.
+-   Do not include student names, phone numbers, email addresses,
+    registration numbers, or other sensitive records in public
+    repositories.
+-   Report the dataset source, target definition, class distribution,
+    evaluation method, and limitations alongside any performance claims.
+-   Readiness scores are guidance metrics, not objective measures of a
+    student's worth or future potential.
 
----
+## Roadmap
 
-## 🗓️ Development Phases
+-   [ ] Verify and document dataset source, schema, and target
+    definition
+-   [ ] Complete and test ingestion and validation
+-   [ ] Build reproducible preprocessing and feature-engineering
+    pipelines
+-   [ ] Train baseline and candidate models
+-   [ ] Compare models with appropriate validation metrics
+-   [ ] Persist the complete preprocessing/model pipeline
+-   [ ] Implement and test prediction API endpoints
+-   [ ] Validate readiness scoring and career recommendations
+-   [ ] Add explainability outputs
+-   [ ] Verify frontend integration and Docker deployment
+-   [ ] Add CI checks, monitoring, and drift detection
 
-| Phase | Milestone | Status |
-| :---: | :--- | :---: |
-| **Phase 1** | Project Architecture, Configuration, Logging & Foundation | **COMPLETED** |
-| **Phase 2** | Dataset Acquisition, Ingestion & Data Validation | **COMPLETED** |
-| **Phase 3** | Data Preprocessing Pipeline & Feature Engineering | **COMPLETED** |
-| **Phase 4** | Model Training, Baseline & Candidate Algorithms | **COMPLETED** |
-| **Phase 5** | Hyperparameter Tuning & Cross-Validation Comparison | **COMPLETED** |
-| **Phase 6** | Model Evaluation, Metrics & Performance Thresholds | **COMPLETED** |
-| **Phase 7** | Model Explainability (SHAP / Feature Importance) | **COMPLETED** |
-| **Phase 8** | Placement Prediction Inference Engine & Confidence Scoring | **COMPLETED** |
-| **Phase 9** | Model Registry & MLflow Experiment Tracking | **COMPLETED** |
-| **Phase 10**| Placement Readiness Scoring Engine | **COMPLETED** |
-| **Phase 11**| AI-Generated Career Insights & Skill Gap Analysis | **COMPLETED** |
-| **Phase 12**| Production FastAPI Microservice & Endpoints | **COMPLETED** |
-| **Phase 13**| Frontend Dashboard Integration | **COMPLETED** |
-| **Phase 14**| Production Docker Containerization | **COMPLETED** |
-| **Phase 15**| Production CI/CD with GitHub Actions | **COMPLETED** |
-| **Phase 16**| Model Monitoring, Drift Detection & Production Logging | Planned |
+Update these checkboxes only when each milestone is implemented and
+verified.
 
----
+## Contributing
 
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+1.  Fork the repository.
+2.  Create a feature branch.
+3.  Make focused changes and add tests where applicable.
+4.  Run the relevant tests and formatting checks.
+5.  Open a pull request describing the change and validation performed.
 
+## License
+
+Choose a license before publishing. If you intend to use the MIT
+License, add a `LICENSE` file containing the appropriate MIT License
+text and update this section accordingly.
+
+------------------------------------------------------------------------
+
+**Built as a student-focused ML/MLOps project to explore placement
+prediction, career readiness, model evaluation, and responsible AI.**
