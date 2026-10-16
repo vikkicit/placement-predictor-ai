@@ -1,0 +1,85 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Testing and Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# Data directories (preserve .gitkeep)
+data/raw/*
+!data/raw/.gitkeep
+data/interim/*
+!data/interim/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/external/*
+!data/external/.gitkeep
+
+# Artifacts & Model storage (preserve .gitkeep)
+artifacts/models/*
+!artifacts/models/.gitkeep
+artifacts/preprocessors/*
+!artifacts/preprocessors/.gitkeep
+artifacts/metrics/*
+!artifacts/metrics/.gitkeep
+artifacts/explainability/*
+!artifacts/explainability/.gitkeep
+
+# MLflow Tracking
+mlruns/*
+!mlruns/.gitkeep
+.mlflow/
+
+# Notebook checkpoints
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints
+
+# Logs
+logs/
+*.log
